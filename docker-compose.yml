@@ -2,7 +2,6 @@ services:
   web:
     build: 
       context: .
-    imagee: hello-flask:latest
     container_name: hello-flask
     ports:
       - "8080:80"  
