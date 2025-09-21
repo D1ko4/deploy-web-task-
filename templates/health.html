@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+
+{% block title %}Health Check - Flask App{% endblock %}
+
+{% block content %}
+<div class="health-section">
+    <div class="container">
+        <div class="health-card">
+            <div class="health-status">
+                <div class="status-icon">✅</div>
+                <h1 class="status-title">System Status</h1>
+                <p class="status-message">All systems operational</p>
+            </div>
+            <div class="health-details">
+                <div class="health-item">
+                    <span class="health-label">Status:</span>
+                    <span class="health-value success">OK</span>
+                </div>
+                <div class="health-item">
+                    <span class="health-label">Response Code:</span>
+                    <span class="health-value">200</span>
+                </div>
+                <div class="health-item">
+                    <span class="health-label">Server:</span>
+                    <span class="health-value">Flask Development Server</span>
+                </div>
+            </div>
+            <a href="/" class="btn btn-primary">Back to Home</a>
+        </div>
+    </div>
+</div>
+{% endblock %}

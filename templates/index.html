@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+
+{% block title %}Welcome - Flask App{% endblock %}
+
+{% block content %}
+<div class="hero-section">
+    <div class="hero-content">
+        <h1 class="hero-title">Hello, World! 🌍</h1>
+        <p class="hero-subtitle">Welcome to our modern Flask web application</p>
+        <div class="hero-buttons">
+            <a href="/healthz" class="btn btn-primary">Check Health Status</a>
+            <a href="https://github.com/D1ko4/deploy-web-task-" target="_blank" class="btn btn-secondary">View on GitHub</a>
+        </div>
+    </div>
+</div>
+
+<div class="features-section">
+    <div class="container">
+        <h2 class="section-title">Features</h2>
+        <div class="features-grid">
+            <div class="feature-card">
+                <div class="feature-icon">🚀</div>
+                <h3>Fast Deployment</h3>
+                <p>Automated CI/CD pipeline with Docker containerization</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">💡</div>
+                <h3>Modern Design</h3>
+                <p>Clean, responsive interface with modern CSS styling</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">🔧</div>
+                <h3>Health Monitoring</h3>
+                <p>Built-in health check endpoint for monitoring</p>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
