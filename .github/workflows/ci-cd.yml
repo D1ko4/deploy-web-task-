@@ -1,4 +1,4 @@
-name: Deploy 
+name: Deploy (Blue-Green, local images)
 
 on:
   push:
@@ -15,5 +15,16 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Start/Update stack
-        run: docker compose up -d --build
+      - name: Build local image tagged with commit SHA
+        working-directory: ${{ github.workspace }}
+        run: |
+          docker build -t hello-app:${{ github.sha }} .
+
+      - name: Deploy to idle color (health-checked)
+        run: |
+          ~/bluegreen/deploy_to_idle.sh ${{ github.sha }}
+
+
+      - name: Switch NPM to idle color & flip ACTIVE
+        run: 
+          ~/bluegreen/switch_to_idle_and_flip.sh
