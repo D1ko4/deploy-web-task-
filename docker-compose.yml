@@ -5,6 +5,12 @@ services:
     container_name: hello-flask
     ports:
       - "8080:80"
-    volumes:                # <- correct spelling and indent
+    volumes:                
       - ./logs/app:/app/logs
+    networks:
+      - web
     restart: unless-stopped
+
+networks:
+  web:
+    external: true
