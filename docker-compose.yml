@@ -6,7 +6,7 @@ services:
     ports:
       - "8080:80"
     volumes:                
-      - ./logs/app:/app/logs
+      - /home/d1ko4/logs/app:/app/logs
     networks:
       - web
     restart: unless-stopped
