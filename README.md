@@ -1,27 +1,27 @@
 # Flask Web Application with CI/CD Deployment
 
-**Live demo:** https://hello.d1ko4.com/
+**🚀 Live demo:** https://hello.d1ko4.com/
 
-## Table of Contents
+## 📋 Table of Contents
 
-- [About the Task](#about-the-task)
-- [Step 1: Containerizing Flask Application](#step-1-containerizing-flask-application)
-- [Step 2: Nginx Reverse Proxy](#step-2-nginx-reverse-proxy)
-- [Step 3: CI/CD Pipeline](#step-3-cicd-pipeline)
-- [Step 4: Monitoring & Logging](#step-4-monitoring--logging)
-- [Step 5: Proxmox Setup](#step-5-proxmox-setup)
+- [📖 About the Task](#about-the-task)
+- [🐳 Step 1: Containerizing Flask Application](#step-1-containerizing-flask-application)
+- [🔄 Step 2: Nginx Reverse Proxy](#step-2-nginx-reverse-proxy)
+- [⚙️ Step 3: CI/CD Pipeline](#step-3-cicd-pipeline)
+- [📊 Step 4: Monitoring & Logging](#step-4-monitoring--logging)
+- [🖥️ Step 5: Proxmox Setup](#step-5-proxmox-setup)
 
-## About the Task
+## 📖 About the Task
 
 This DevOps task demonstrates:
 
-- Docker containerization
-- Nginx reverse proxy configuration
-- CI/CD automation with GitHub Actions
-- Basic monitoring and logging
-- Documentation with reproducible steps
+- 🐳 **Docker containerization**
+- 🔄 **Nginx reverse proxy configuration**
+- ⚙️ **CI/CD automation with GitHub Actions**
+- 📊 **Basic monitoring and logging**
+- 📚 **Documentation with reproducible steps**
 
-## Step 1: Containerizing Flask Application
+## 🐳 Step 1: Containerizing Flask Application
 
 A simple Flask web application was containerized using Docker.
 
@@ -58,7 +58,7 @@ docker compose up -d --build
 
 The application responds with "Hello, World!" at http://localhost:5000
 
-## Step 2: Nginx Reverse Proxy
+## 🔄 Step 2: Nginx Reverse Proxy
 
 Used Nginx Proxy Manager (NPM) for reverse proxy with web UI and SSL certificate management.
 
@@ -102,7 +102,7 @@ Access admin interface at: `http://<SERVER_IP>:81`
 
 **Note:** If IPv6 is not enabled, add `DISABLE_IPV6=true` to the configuration.
 
-## Step 3: CI/CD Pipeline
+## ⚙️ Step 3: CI/CD Pipeline
 
 Automated deployment using GitHub Actions with self-hosted runner.
 
@@ -155,7 +155,7 @@ jobs:
           docker compose up -d --build
 ```
 
-## Step 4: Monitoring & Logging
+## 📊 Step 4: Monitoring & Logging
 
 **Default logging:**
 All containers output logs to stdout/stderr:
@@ -186,7 +186,7 @@ services:
 - Flask logs: `/home/d1ko4/logs/app`
 - Nginx logs: `/home/d1ko4/logs/nginx`
 
-## Step 5: Proxmox Setup
+## 🖥️ Step 5: Proxmox Setup
 
 **Challenges encountered:**
 - Proxmox installation requires bare metal or dedicated hardware
