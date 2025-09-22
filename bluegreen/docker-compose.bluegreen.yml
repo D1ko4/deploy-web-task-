@@ -1,0 +1,22 @@
+services:
+  hello-blue:
+    image: hello-app:${BLUE_TAG:-blue}     # local image tag (no registry)
+    container_name: hello-blue
+    expose:
+      - "80"
+    networks:
+      - web
+    restart: unless-stopped
+
+  hello-green:
+    image: hello-app:${GREEN_TAG:-green}   # local image tag (no registry)
+    container_name: hello-green
+    expose:
+      - "80"
+    networks:
+      - web
+    restart: unless-stopped
+
+networks:
+  web:
+    external: true
