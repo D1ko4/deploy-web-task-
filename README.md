@@ -9,7 +9,8 @@
 - [🔄 Step 2: Nginx Reverse Proxy](#step-2-nginx-reverse-proxy)
 - [⚙️ Step 3: CI/CD Pipeline](#step-3-cicd-pipeline)
 - [📊 Step 4: Monitoring & Logging](#step-4-monitoring--logging)
-- [🖥️ Step 5: Proxmox Setup](#step-5-proxmox-setup)
+- [� Step 5: Zero-Downtime Deployment (Blue-Green)](#step-5-zero-downtime-deployment-blue-green)
+- [�🖥️ Step 6: Proxmox Setup](#step-6-proxmox-setup)
 
 ## 📖 About the Task
 
@@ -63,7 +64,7 @@ The application responds with "Hello, World!" at http://localhost:5000
 Used Nginx Proxy Manager (NPM) for reverse proxy with web UI and SSL certificate management.
 
 **Server setup:**
-- Provider: serverspace.kz
+- Provider: [serverspace.kz](https://serverspace.kz)
 - OS: Ubuntu 24.04 (x64)
 
 **Installation:**
@@ -186,7 +187,38 @@ services:
 - Flask logs: `/home/d1ko4/logs/app`
 - Nginx logs: `/home/d1ko4/logs/nginx`
 
-## 🖥️ Step 5: Proxmox Setup
+## � Step 5: Zero-Downtime Deployment (Blue-Green)
+
+To avoid downtime during deploys, I implemented a Blue-Green deployment strategy.
+Instead of replacing the running container, we keep two identical environments (blue and green), only one is active at a time.
+
+**How it works:**
+
+1. The active color (e.g., blue) serves traffic
+2. CI builds a new image tagged with the commit SHA
+3. The new image is deployed to the idle color (green)
+4. A health-check confirms the idle container is working
+5. Traffic is switched to the idle color (Nginx Proxy Manager always forwards to `hello-active`)
+6. The old container remains available for rollback, but traffic no longer goes through it
+
+This ensures that users never experience downtime during updates.
+
+**Files overview:**
+
+- `ACTIVE` – state file storing the current live color (blue or green)
+- `docker-compose.bluegreen.yml` – defines both hello-blue and hello-green services
+- `deploy_to_idle.sh` – builds and starts the idle color with the new image, then health-checks it
+- `switch_to_idle_and_flip.sh` – switches the alias hello-active to point to the new color and updates ACTIVE
+- CI/CD Workflow (`ci.yml`) – GitHub Actions job that automates building, deploying, and switching on every push to main
+
+**CI/CD integration:**
+
+The GitHub Actions workflow:
+1. Builds a new Docker image tagged with the commit SHA
+2. Deploys to the idle color (`deploy_to_idle.sh`)
+3. Switches traffic by running `switch_to_idle_and_flip.sh`
+
+## �🖥️ Step 6: Proxmox Setup
 
 **Challenges encountered:**
 - Proxmox installation requires bare metal or dedicated hardware
